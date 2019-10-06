@@ -1,6 +1,8 @@
 import cv2
 import dlib
 import time
+import requests 
+from datetime import datetime
 import numpy as np
 import multiprocessing as mp
 class FrameDetection():
@@ -73,7 +75,6 @@ class FrameDetection():
                 time.sleep(0.01)
                 continue
             frame = face_queues.get()
-            print(type(frame))
             face_rects, scores, idx = detector.run(frame, 0)
             for i, d in enumerate(face_rects):
                 x1 = d.left()
@@ -81,8 +82,15 @@ class FrameDetection():
                 x2 = d.right()
                 y2 = d.bottom()
                 if scores[i] >= 0.60:
-                    print('have people')
-                    cv2.imwrite("AAA.jpeg", frame) #change file name to datetime
                     square_point = [x1 , y1 , x2, y2]
                     location_queues.put(square_point)
                     location_queues.get() if location_queues.qsize() > 1 else time.sleep(0.01)
+                    self.upload_detection(frame)
+
+    def upload_detection(self, frame):
+        file_name =datetime.now().strftime('%Y-%m-%d-%H-%M-%S'+.jpeg)
+        cv2.imwrite(file_name, frame)
+        picture = {'upload':open(file_name, 'rb')}
+        r = requests.post('http://192.168.50.69:5000/upload', files=picture)
+
+
