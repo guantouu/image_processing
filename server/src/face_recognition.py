@@ -2,7 +2,7 @@ import sys,os,dlib,glob,numpy
 import cv2
 import sqlite3
 faces_folder_path = "../rec"
-file_path = '../picture'
+file_path = './static'
 SQLITE_DB_PATH = '../database.db'
 descriptors = []
 candidate = []
