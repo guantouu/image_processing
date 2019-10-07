@@ -36,7 +36,7 @@ def face_recognition(filenames, detector, face_feature, face_rec):
             who = key
             break
         else:
-            who ='guest'
+            who ='guest_' + filenames.split('.', 1)[0]
 
     db =sqlite3.connect(SQLITE_DB_PATH)
     with db:

@@ -8,16 +8,15 @@
     <script>
         function myfunction(){
             var file_name = document.getElementById("who").value;
-            file_name = "../../picture" + file_name;
+            file_name = "static/" + file_name;
             document.getElementById("picture").innerHTML='<img src='+file_name+'>'
         }
     </script>
-
 </head>
 <body>
 <div>
     <form>
-        <select id="who">
+        <select id="who" onchange="myfunction()">
             {% for result in results %}
             <option value={{result.0}}>{{result.1}}</option>
             {% endfor %}
