@@ -1,9 +1,12 @@
 import sys,os,dlib,glob,numpy
 import cv2
-faces_folder_path = "./rec"
-file_path = './picture'
+import sqlite3
+faces_folder_path = "../rec"
+file_path = '../picture'
+SQLITE_DB_PATH = '../database.db'
 descriptors = []
 candidate = []
+
 def face_recognition(filenames, detector, face_feature, face_rec):
     who = ''
     detector = dlib.get_frontal_face_detector()
@@ -28,11 +31,16 @@ def face_recognition(filenames, detector, face_feature, face_rec):
             dist_ = numpy.linalg.norm(i - d_test)
             dist.append(dist_)
     c_d = dict(zip(candidate,dist))
-    print(c_d)
     for key, value in sorted(c_d.items(), key=lambda d:d[1]):
         if value <= 0.6:
             who = key
             break
         else:
             who ='guest'
-    print(who)
+
+    db =sqlite3.connect(SQLITE_DB_PATH)
+    with db:
+        db.execute('INSERT INTO detection (file, name)'  \
+                  +'VALUES (?, ?)', (filenames, who))
+    db.close()
+    

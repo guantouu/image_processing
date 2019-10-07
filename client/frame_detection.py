@@ -2,9 +2,11 @@ import cv2
 import dlib
 import time
 import requests 
+import os
 from datetime import datetime
 import numpy as np
 import multiprocessing as mp
+file_path = './picture'
 class FrameDetection():
     def initialize(self, frame01):
         blur = cv2.GaussianBlur(frame01, (3, 3), 1.5)
@@ -88,7 +90,9 @@ class FrameDetection():
                     self.upload_detection(frame)
 
     def upload_detection(self, frame):
-        file_name =datetime.now().strftime('%Y-%m-%d-%H-%M-%S'+.jpeg)
+        if not os.path.exists(file_path):
+            os.makedirs(file_path)
+        file_name =file_path + datetime.now().strftime('%Y-%m-%d-%H-%M-%S')+'.jpeg'
         cv2.imwrite(file_name, frame)
         picture = {'upload':open(file_name, 'rb')}
         r = requests.post('http://192.168.50.69:5000/upload', files=picture)

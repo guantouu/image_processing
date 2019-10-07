@@ -1,1 +1,3 @@
-env01/
+server/picture/
+server/rec/
+server/database.db

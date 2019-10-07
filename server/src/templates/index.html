@@ -1,0 +1,30 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>紀錄</title>
+    <script>
+        function myfunction(){
+            var file_name = document.getElementById("who").value;
+            file_name = "../../picture" + file_name;
+            document.getElementById("picture").innerHTML='<img src='+file_name+'>'
+        }
+    </script>
+
+</head>
+<body>
+<div>
+    <form>
+        <select id="who">
+            {% for result in results %}
+            <option value={{result.0}}>{{result.1}}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+<div id="picture">
+</div>
+</body>
+</html>
