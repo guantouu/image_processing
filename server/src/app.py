@@ -5,7 +5,7 @@ import sqlite3
 from face_recognition import face_recognition
 from flask import Flask, request, make_response, render_template
 app = Flask('__name__')
-file_path = '../picture'
+file_path = './static'
 SQLITE_DB_PATH = '../database.db'
 detector = dlib.get_frontal_face_detector()
 face_feature = dlib.shape_predictor(
@@ -40,4 +40,4 @@ def index():
         
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=False)

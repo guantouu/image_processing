@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 import numpy as np
 import multiprocessing as mp
+URL = 'http://flask.guantouu.pw/upload'
 file_path = './picture'
 class FrameDetection():
     def initialize(self, frame01):
@@ -95,6 +96,6 @@ class FrameDetection():
         file_name =file_path + datetime.now().strftime('%Y-%m-%d-%H-%M-%S')+'.jpeg'
         cv2.imwrite(file_name, frame)
         picture = {'upload':open(file_name, 'rb')}
-        r = requests.post('http://192.168.50.69:5000/upload', files=picture)
+        r = requests.post(URL, files=picture)
 
 
