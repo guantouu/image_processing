@@ -11,6 +11,8 @@ class MainProcess():
     
     def process_controller(self):
         cap = cv2.VideoCapture(0) #require raspberry pi camera port serial
+        cap.set(3, 640)
+        cap.set(4, 480)
         ret, frame01 = cap.read()
         door_point = self.frame_detection.initialize(frame01)
         if door_point is not False: 

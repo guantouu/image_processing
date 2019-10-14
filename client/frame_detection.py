@@ -93,7 +93,7 @@ class FrameDetection():
     def upload_detection(self, frame):
         if not os.path.exists(file_path):
             os.makedirs(file_path)
-        file_name =file_path + datetime.now().strftime('%Y-%m-%d-%H-%M-%S')+'.jpeg'
+        file_name =file_path + '/' + datetime.now().strftime('%Y-%m-%d-%H-%M-%S')+'.jpeg'
         cv2.imwrite(file_name, frame)
         picture = {'upload':open(file_name, 'rb')}
         r = requests.post(URL, files=picture)

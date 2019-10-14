@@ -1,3 +1,4 @@
 server/picture/
 server/rec/
+server/src/static
 server/database.db
