@@ -1,4 +1,3 @@
-server/picture/
-server/rec/
-server/src/static
-server/database.db
+.DS_Store
+client/.vscode
+server/.DS_Store
