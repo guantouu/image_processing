@@ -1,3 +1,4 @@
 .DS_Store
 client/.vscode
 server/.DS_Store
+server/data/
